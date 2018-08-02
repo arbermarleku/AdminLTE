@@ -43,58 +43,56 @@
   </div>
   <!-- /.box-body -->
   <div class="box-footer clearfix">
-    <div class="col"><a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left" data-toggle="modal" data-target="#modal-default">Create New Employee</a></div>
+    <div class="col"><a class="btn btn-sm btn-info btn-flat pull-left" data-toggle="modal" data-target="#modal-default">Create New Employee</a></div>
   </div>
   <!-- /.box-footer -->
 </div>
 
 <div class="modal fade" id="modal-default">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span></button>
-          <h4 class="modal-title">Create New Employee</h4>
-        </div>
-        <div class="modal-body">
-            <form role="form">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="name">Name and Surname</label>
-                  <input type="text" class="form-control" id="name" placeholder="Name and Surname">
-                </div>
-                <div class="form-group">
-                  <label for="username">Username</label>
-                  <input type="text" class="form-control" id="username" placeholder="Username">
-                </div>
-                <div class="form-group">
-                    <label for="telephone">Telephone</label>
-                    <input type="text" class="form-control" id="telephone" placeholder="Telephone">
-                  </div>
-                  <div class="form-group">
-                  <label>Name and Surname</label>
-                  <select class="form-control">
-                      <option disabled>Select One</option>
-                      <optgroup  label="Management"></optgroup>
-                      <option>CEO</option>
-                      <option>CFO</option>
-                      <option>Manager</option>
-                      <option>TeamLeader</option>
-                      <optgroup label="Other"></optgroup>
-                      <option>Sales Agent</option>
-                      <option>Supervisor</option>
-                      <option>Group Leader</option>
-                    </select>
-                </div>
-              </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">Create New Employee</h4>
+      </div>
+      <div class="modal-body">
+        <div class="box-body">
+          <div class="form-group">
+            <label for="name">Name and Surname</label>
+            <input type="text" class="form-control" id="name" placeholder="Name and Surname" [(ngModel)]="newEmployee.name">
+          </div>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Username" [(ngModel)]="newEmployee.username">
+          </div>
+          <div class="form-group">
+              <label for="telephone">Telephone</label>
+              <input type="text" class="form-control" id="telephone" placeholder="Telephone" [(ngModel)]="newEmployee.telephone">
+            </div>
+            <div class="form-group">
+            <label>Position</label>
+            <select class="form-control" [(ngModel)]="newEmployee.position">
+                <option disabled>Select One</option>
+                <optgroup  label="Management"></optgroup>
+                <option>CEO</option>
+                <option>CFO</option>
+                <option>Manager</option>
+                <option>TeamLeader</option>
+                <optgroup label="Other"></optgroup>
+                <option>Sales Agent</option>
+                <option>Supervisor</option>
+                <option>Group Leader</option>
+              </select>
+          </div>
         </div>
       </div>
-      <!-- /.modal-content -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="addNewEmployee()" data-dismiss="modal">Save changes</button>
+      </div>
     </div>
-    <!-- /.modal-dialog -->
+    <!-- /.modal-content -->
   </div>
+  <!-- /.modal-dialog -->
+</div>

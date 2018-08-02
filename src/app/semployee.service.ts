@@ -41,6 +41,10 @@ export class SEmployeeService {
   getEmployees(): Observable<IEmployee[]> {
     return of(this.myEmployee);
   }
+  setEmployees(value: IEmployee): Observable<IEmployee[]> {
+    this.myEmployee.push(value);
+    return of(this.myEmployee);
+  }
 
   constructor() { }
 }
