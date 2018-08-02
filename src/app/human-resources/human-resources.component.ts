@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IEmployee } from '../iemployee';
+import { SEmployeeService } from '../semployee.service';
 
 @Component({
   selector: 'app-human-resources',
@@ -6,35 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./human-resources.component.css']
 })
 export class HumanResourcesComponent implements OnInit {
+  myEmployee: IEmployee[];
 
-  myEmployee: any[] = [
-    {
-      id: '10001',
-      name: 'Arber Marleku',
-      username: 'amarleku',
-      telephone: '+38349600432',
-      position: 'CEO'
-    },
-    {
-      id: '10001',
-      name: 'Petrit Berisha',
-      username: 'pberisha',
-      telephone: '+38349499494',
-      position: 'CFO'
-    },
-    {
-      id: '10001',
-      name: 'Dorina Marku',
-      username: 'dmarku',
-      telephone: '+38349700454',
-      position: 'CFO'
-    }
-  ];
-  title = 'Testing';
-
-  constructor() { }
+  constructor(private SEmployee: SEmployeeService) { }
 
   ngOnInit() {
+    this.myEmployee = this.SEmployee.getEmployees();
   }
 
 }
