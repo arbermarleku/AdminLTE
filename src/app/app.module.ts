@@ -9,12 +9,13 @@ import { ControlsidepanelComponent } from './controlsidepanel/controlsidepanel.c
 import { SitefooterComponent } from './sitefooter/sitefooter.component';
 import { HumanResourcesComponent } from './human-resources/human-resources.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
   { path: 'human-resources', component: HumanResourcesComponent },
-  { path: '', redirectTo: '/heroes', pathMatch: 'full'},
+  { path: 'dashboard', component: DashboardComponent },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent }
 ];
 
