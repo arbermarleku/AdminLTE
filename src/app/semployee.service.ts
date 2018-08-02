@@ -10,7 +10,7 @@ import { catchError, tap } from 'rxjs/operators';
 export class SEmployeeService {
 
   // url for fake api: https://my-json-server.typicode.com/arbermaleku/AdminLTE/employees
-  private employeeApiUrl = 'http://my-json-server.typicode.com/arbermaleku/AdminLTE/employees';
+  private employeeApiUrl = 'https://my-json-server.typicode.com/arbermaleku/AdminLTE/employees';
 
   getEmployees(): Observable<IEmployee[]> {
     return this.http.get<IEmployee[]>(this.employeeApiUrl).pipe(
