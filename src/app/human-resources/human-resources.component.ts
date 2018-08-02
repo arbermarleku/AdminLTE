@@ -13,7 +13,7 @@ export class HumanResourcesComponent implements OnInit {
   constructor(private SEmployee: SEmployeeService) { }
 
   ngOnInit() {
-    this.myEmployee = this.SEmployee.getEmployees();
+    this.SEmployee.getEmployees()
+      .subscribe(myEmployee => this.myEmployee = myEmployee);
   }
-
 }

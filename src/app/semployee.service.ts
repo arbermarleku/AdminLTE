@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IEmployee } from './iemployee';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,8 +38,9 @@ export class SEmployeeService {
     }
   ];
 
-  getEmployees(){
-    return this.myEmployee;
+  getEmployees(): Observable<IEmployee[]> {
+    return of(this.myEmployee);
   }
+
   constructor() { }
 }
