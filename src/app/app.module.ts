@@ -7,6 +7,16 @@ import { MainheaderComponent } from './mainheader/mainheader.component';
 import { ContentwrapperComponent } from './contentwrapper/contentwrapper.component';
 import { ControlsidepanelComponent } from './controlsidepanel/controlsidepanel.component';
 import { SitefooterComponent } from './sitefooter/sitefooter.component';
+import { HumanResourcesComponent } from './human-resources/human-resources.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
+const appRoutes: Routes = [
+  { path: 'human-resources', component: HumanResourcesComponent },
+  { path: '', redirectTo: '/heroes', pathMatch: 'full'},
+  { path: '**', component: PageNotFoundComponent }
+];
 
 @NgModule({
   declarations: [
@@ -15,10 +25,17 @@ import { SitefooterComponent } from './sitefooter/sitefooter.component';
     MainheaderComponent,
     ContentwrapperComponent,
     ControlsidepanelComponent,
-    SitefooterComponent
+    SitefooterComponent,
+    HumanResourcesComponent,
+    PageNotFoundComponent,
+    DashboardComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]
