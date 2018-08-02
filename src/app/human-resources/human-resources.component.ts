@@ -33,9 +33,14 @@ export class HumanResourcesComponent implements OnInit {
       position: ''
     };
   }
-  deleteEmployee(myEmployee: Number) {
-    console.log(myEmployee);
-    this.SEmployee.deleteEmployee(myEmployee).subscribe();
+  deleteEmployee(employeeId: Number) {
+    console.log(employeeId);
+    if (this.SEmployee.deleteEmployee(employeeId).subscribe()) {
+      const index = this.myEmployee.findIndex(function(o) {
+        return o.id === employeeId;
+      });
+      this.myEmployee.splice(index, 1);
+    }
   }
 
   constructor(private SEmployee: SEmployeeService) { }
