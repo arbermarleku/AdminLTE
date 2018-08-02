@@ -1,50 +1,46 @@
 import { Injectable } from '@angular/core';
 import { IEmployee } from './iemployee';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SEmployeeService {
 
-  myEmployee: IEmployee[] = [
-    {
-      id: 10001,
-      name: 'Arber Marleku',
-      username: 'amarleku',
-      telephone: '+38349600432',
-      position: 'CEO'
-    },
-    {
-      id: 10002,
-      name: 'Petrit Berisha',
-      username: 'pberisha',
-      telephone: '+38349499494',
-      position: 'CFO'
-    },
-    {
-      id: 10003,
-      name: 'Dorina Marku',
-      username: 'dmarku',
-      telephone: '+38349700454',
-      position: 'Manager'
-    },
-    {
-      id: 10004,
-      name: 'Valentina Berisha',
-      username: 'vberisha',
-      telephone: '+38349333453',
-      position: 'Team Leader'
-    }
-  ];
+  // url for fake api: https://my-json-server.typicode.com/arbermaleku/AdminLTE/employees
+  private employeeApiUrl = 'http://my-json-server.typicode.com/arbermaleku/AdminLTE/employees';
 
   getEmployees(): Observable<IEmployee[]> {
-    return of(this.myEmployee);
+    return this.http.get<IEmployee[]>(this.employeeApiUrl).pipe(
+      tap(data => console.log('ALL: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
   }
-  setEmployees(value: IEmployee): Observable<IEmployee[]> {
-    this.myEmployee.push(value);
-    return of(this.myEmployee);
+  addEmployees (newEmployee: IEmployee): Observable<IEmployee> {
+    return this.http.post<IEmployee>(this.employeeApiUrl, newEmployee)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
+  deleteEmployee (id: Number): Observable<{}> {
+    const url = `${this.employeeApiUrl}/${id}`; // DELETE api/heroes/42
+    return this.http.delete(url)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+  constructor(private http: HttpClient) {}
 
-  constructor() { }
+  private handleError(err: HttpErrorResponse) {
+    let errorMessage = '';
+    if (err.error instanceof ErrorEvent) {
+      errorMessage = `An error acured: ${err.error.message}`;
+    } else {
+      errorMessage = `Server returned code: ${err.status}, and error message is: ${err.error.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
+  }
 }

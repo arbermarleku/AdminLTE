@@ -19,11 +19,12 @@ export class HumanResourcesComponent implements OnInit {
     telephone: '',
     position: ''
   };
+  errorMessage: String;
 
   addNewEmployee() {
-    console.log(this.newEmployee);
-    this.newEmployee.id = uuid();
-    this.SEmployee.setEmployees(this.newEmployee).subscribe(myEmployee => this.myEmployee = myEmployee);
+    // console.log(this.newEmployee);
+    // this.newEmployee.id = uuid();
+    this.SEmployee.addEmployees(this.newEmployee).subscribe(newEmployee => this.myEmployee.push(newEmployee));
     this.newEmployee = {
       id: null,
       name: '',
@@ -32,11 +33,18 @@ export class HumanResourcesComponent implements OnInit {
       position: ''
     };
   }
+  deleteEmployee(myEmployee: Number) {
+    console.log(myEmployee);
+    this.SEmployee.deleteEmployee(myEmployee).subscribe();
+  }
 
   constructor(private SEmployee: SEmployeeService) { }
 
   ngOnInit() {
     this.SEmployee.getEmployees()
-      .subscribe(myEmployee => this.myEmployee = myEmployee);
+      .subscribe(
+        myEmployee => this.myEmployee = myEmployee,
+        error => this.errorMessage = <any>error
+      );
   }
 }
