@@ -23,51 +23,12 @@
         </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><a href="pages/examples/invoice.html">100001</a></td>
-            <td>CEO</td>
-            <td>a.marleku</td>
-            <td>Arber Marleku</td>
-            <td>+38349600432</td>
-            <td>
-              <div class="btn-group">
-                <button type="button" class="btn btn-info btn-xs">Details</button>
-                <button type="button" class="btn btn-danger btn-xs">Suspend</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="pages/examples/invoice.html">100001</a></td>
-            <td>CEO</td>
-            <td>a.marleku</td>
-            <td>Arber Marleku</td>
-            <td>+38349600432</td>
-            <td>
-              <div class="btn-group">
-                <button type="button" class="btn btn-info btn-xs">Details</button>
-                <button type="button" class="btn btn-danger btn-xs">Suspend</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="pages/examples/invoice.html">100001</a></td>
-            <td>CEO</td>
-            <td>a.marleku</td>
-            <td>Arber Marleku</td>
-            <td>+38349600432</td>
-            <td>
-              <div class="btn-group">
-                <button type="button" class="btn btn-info btn-xs">Details</button>
-                <button type="button" class="btn btn-danger btn-xs">Suspend</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="pages/examples/invoice.html">100001</a></td>
-            <td>CEO</td>
-            <td>a.marleku</td>
-            <td>Arber Marleku</td>
-            <td>+38349600432</td>
+          <tr *ngFor="let e of myEmployee">
+            <td><a href="pages/examples/invoice.html">{{ e.id }}</a></td>
+            <td>{{ e.position }}</td>
+            <td>{{ e.username }}</td>
+            <td>{{ e.name }}</td>
+            <td>{{ e.telephone }}</td>
             <td>
               <div class="btn-group">
                 <button type="button" class="btn btn-info btn-xs">Details</button>
