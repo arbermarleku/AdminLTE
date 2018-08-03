@@ -10,11 +10,10 @@ import { catchError, tap } from 'rxjs/operators';
 export class SEmployeeService {
 
   // url for fake api: https://my-json-server.typicode.com/arbermaleku/AdminLTE/employees
-  private employeeApiUrl = 'https://my-json-server.typicode.com/arbermaleku/AdminLTE/employees';
+  private employeeApiUrl = 'https://my-json-server.typicode.com/arbermarleku/AdminLTE/employees';
 
   getEmployees(): Observable<IEmployee[]> {
     return this.http.get<IEmployee[]>(this.employeeApiUrl).pipe(
-      tap(data => console.log('ALL: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );
   }
@@ -26,7 +25,7 @@ export class SEmployeeService {
   }
   deleteEmployee (id: Number): Observable<{}> {
     const url = `${this.employeeApiUrl}/${id}`; // DELETE api/heroes/42
-    return this.http.delete(url)
+    return this.http.delete(url, {observe: 'response'})
       .pipe(
         catchError(this.handleError)
       );
@@ -40,7 +39,6 @@ export class SEmployeeService {
     } else {
       errorMessage = `Server returned code: ${err.status}, and error message is: ${err.error.message}`;
     }
-    console.error(errorMessage);
     return throwError(errorMessage);
   }
 }

@@ -28,19 +28,30 @@ export class HumanResourcesComponent implements OnInit {
       position: ''
     };
   }
+
   deleteEmployee(employeeId: Number) {
-    console.log(employeeId);
-    if (this.SEmployee.deleteEmployee(employeeId).subscribe()) {
-      const index = this.myEmployee.findIndex(function(o) {
-        return o.id === employeeId;
-      });
-      this.myEmployee.splice(index, 1);
-    }
+    this.SEmployee.deleteEmployee(employeeId).subscribe(
+      myEmployee => this.removeEmployee(myEmployee),
+      errorMessage => this.showError()
+    );
+  }
+  removeEmployee(emp){
+    const index = this.myEmployee.findIndex(function(o) {
+      return o.id === emp;
+    });
+    this.myEmployee.splice(index, 1);
+  }
+  showError() {
+    alert('There was an error, the Employee may have been already deleted, refresh your page');
+    this.getEmployees();
   }
 
   constructor(private SEmployee: SEmployeeService) { }
 
   ngOnInit() {
+    this.getEmployees();
+  }
+  getEmployees() {
     this.SEmployee.getEmployees()
       .subscribe(
         myEmployee => this.myEmployee = myEmployee,

@@ -13,6 +13,7 @@ import { HumanResourcesComponent } from './human-resources/human-resources.compo
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
+import { HrDetailsComponent } from './human-resources/hr-details.component';
 
 const appRoutes: Routes = [
   { path: 'human-resources', component: HumanResourcesComponent },
@@ -31,7 +32,8 @@ const appRoutes: Routes = [
     SitefooterComponent,
     HumanResourcesComponent,
     PageNotFoundComponent,
-    DashboardComponent
+    DashboardComponent,
+    HrDetailsComponent
   ],
   imports: [
     BrowserModule,
