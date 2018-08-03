@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IEmployee } from '../iemployee';
 import { SEmployeeService } from '../semployee.service';
-import { v4 as uuid } from 'uuid';
-
-
 
 @Component({
   selector: 'app-human-resources',
@@ -22,8 +19,6 @@ export class HumanResourcesComponent implements OnInit {
   errorMessage: String;
 
   addNewEmployee() {
-    // console.log(this.newEmployee);
-    // this.newEmployee.id = uuid();
     this.SEmployee.addEmployees(this.newEmployee).subscribe(newEmployee => this.myEmployee.push(newEmployee));
     this.newEmployee = {
       id: null,
@@ -50,6 +45,6 @@ export class HumanResourcesComponent implements OnInit {
       .subscribe(
         myEmployee => this.myEmployee = myEmployee,
         error => this.errorMessage = <any>error
-      );
+    );
   }
 }
