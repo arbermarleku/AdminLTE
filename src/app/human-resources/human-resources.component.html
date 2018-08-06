@@ -1,3 +1,8 @@
+<div class="alert alert-danger alert-dismissible" [ngStyle]="{'display': displayError}">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+  {{ errorMessage }}
+</div>
 <div class="box box-info">
   <div class="box-header with-border">
     <h3 class="box-title">Latest Orders</h3>
@@ -24,14 +29,14 @@
         </thead>
         <tbody>
           <tr *ngFor="let e of myEmployee">
-            <td><a href="pages/examples/invoice.html">{{ e.id }}</a></td>
+            <td><a (click)="editEmployee(e.id)" data-toggle="modal" data-target="#modal-editor">{{ e.id }}</a></td>
             <td>{{ e.position }}</td>
             <td>{{ e.username }}</td>
             <td>{{ e.name }}</td>
             <td>{{ e.telephone }}</td>
             <td>
               <div class="btn-group">
-                <button type="button" class="btn btn-info btn-xs">Details</button>
+                <button type="button" class="btn btn-info btn-xs" (click)="editEmployee(e.id)" data-toggle="modal" data-target="#modal-editor">Edit</button>
                 <button type="button" class="btn btn-danger btn-xs" (click)="deleteEmployee(e.id)">Delete</button>
               </div>
             </td>
@@ -90,6 +95,55 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" (click)="addNewEmployee()" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="modal-editor">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">Create New Employee</h4>
+      </div>
+      <div class="modal-body">
+        <div class="box-body">
+          <div class="form-group">
+            <label for="name">Name and Surname</label>
+            <input type="text" class="form-control" id="name" placeholder="Name and Surname" [(ngModel)]="currEmployee.name">
+          </div>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Username" [(ngModel)]="currEmployee.username">
+          </div>
+          <div class="form-group">
+              <label for="telephone">Telephone</label>
+              <input type="text" class="form-control" id="telephone" placeholder="Telephone" [(ngModel)]="currEmployee.telephone">
+            </div>
+            <div class="form-group">
+            <label>Position</label>
+            <select class="form-control" [(ngModel)]="currEmployee.position">
+                <option disabled>Select One</option>
+                <optgroup  label="Management"></optgroup>
+                <option>CEO</option>
+                <option>CFO</option>
+                <option>Manager</option>
+                <option>TeamLeader</option>
+                <optgroup label="Other"></optgroup>
+                <option>Sales Agent</option>
+                <option>Supervisor</option>
+                <option>Group Leader</option>
+              </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="updateEmployee()" data-dismiss="modal">Save changes</button>
       </div>
     </div>
     <!-- /.modal-content -->

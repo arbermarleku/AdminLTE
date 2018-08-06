@@ -9,6 +9,13 @@ import { SEmployeeService } from '../semployee.service';
 })
 export class HumanResourcesComponent implements OnInit {
   myEmployee: IEmployee[];
+  currEmployee: IEmployee = {
+    id: null,
+    name: '',
+    username: '',
+    telephone: '',
+    position: ''
+  };
   newEmployee: IEmployee = {
     id: null,
     name: '',
@@ -16,7 +23,25 @@ export class HumanResourcesComponent implements OnInit {
     telephone: '',
     position: ''
   };
-  errorMessage: String;
+  errorMessage: String = 'Everything OK';
+  displayError: String = 'none';
+
+  editEmployee(employeeId: Number) {
+    const index = this.myEmployee.findIndex(function(o) {
+      return o.id === employeeId;
+    });
+    this.currEmployee = this.myEmployee[index];
+    console.log(this.currEmployee);
+  }
+  updateEmployee() {
+    this.SEmployee.updateEmployee(this.currEmployee).subscribe(currEmployee => {
+      const index = this.myEmployee.findIndex(function(o) {
+        return o.id === currEmployee.id;
+      });
+      this.myEmployee[index] = currEmployee;
+    },
+    errorMessage => this.showError('Error: The employee you edited doesn\'t exist, page will be refreshed'));
+  }
 
   addNewEmployee() {
     this.SEmployee.addEmployees(this.newEmployee).subscribe(newEmployee => this.myEmployee.push(newEmployee));
@@ -32,17 +57,19 @@ export class HumanResourcesComponent implements OnInit {
   deleteEmployee(employeeId: Number) {
     this.SEmployee.deleteEmployee(employeeId).subscribe(
       myEmployee => this.removeEmployee(myEmployee),
-      errorMessage => this.showError()
+      errorMessage => this.showError('Error: There was an error, the Employee may have been already deleted, page will be refreshed')
     );
   }
-  removeEmployee(emp){
+  removeEmployee(emp) {
     const index = this.myEmployee.findIndex(function(o) {
       return o.id === emp;
     });
     this.myEmployee.splice(index, 1);
   }
-  showError() {
-    alert('There was an error, the Employee may have been already deleted, refresh your page');
+  showError(error: String) {
+    this.errorMessage = error;
+    this.displayError = 'block';
+    setTimeout( () => { this.displayError = 'none'; }, 5000 );
     this.getEmployees();
   }
 

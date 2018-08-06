@@ -30,6 +30,13 @@ export class SEmployeeService {
         catchError(this.handleError)
       );
   }
+  updateEmployee(currEmployee: IEmployee): Observable<IEmployee> {
+    return this.http.put<IEmployee>(this.employeeApiUrl + '/' + currEmployee.id, currEmployee)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   constructor(private http: HttpClient) {}
 
   private handleError(err: HttpErrorResponse) {
